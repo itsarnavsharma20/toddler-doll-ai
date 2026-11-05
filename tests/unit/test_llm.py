@@ -34,7 +34,13 @@ class LLMTests(unittest.TestCase):
         self.assertEqual(config.load_settings()["toy_name"], "Kiko")
         self.provider().generate("hello", "en")
         self.assertIn("You are Kiko", self.system_prompt())
-        self.assertIn("say Kiko", self.system_prompt())
+
+    def test_prompt_stays_short(self):
+        self.provider().generate("hello", "hi")
+        self.assertLess(len(self.system_prompt().split()), 65)
+
+    def test_url_uses_ip_not_localhost(self):
+        self.assertIn("127.0.0.1", config.load_settings()["llm"]["url"])
 
     def test_changing_config_changes_name(self):
         settings = dict(self.original_load(), toy_name="Zed")
@@ -42,6 +48,41 @@ class LLMTests(unittest.TestCase):
         self.provider().generate("hello", "en")
         self.assertIn("You are Zed", self.system_prompt())
         self.assertNotIn("Kiko", self.system_prompt())
+
+    def test_kiko_is_male_in_hindi(self):
+        self.assertEqual(config.load_settings()["toy_gender"], "male")
+        self.provider().generate("namaste", "hi")
+        self.assertIn("You are a boy", self.system_prompt())
+        self.assertIn("masculine", self.system_prompt())
+
+    def test_gender_can_change_or_be_left_out(self):
+        base = self.original_load()
+        config.load_settings = lambda: dict(base, toy_gender="female")
+        self.assertIn("feminine", llm.build_system_prompt("hi"))
+        config.load_settings = lambda: {k: v for k, v in base.items() if k != "toy_gender"}
+        self.assertNotIn("masculine", llm.build_system_prompt("hi"))
+        self.assertNotIn("feminine", llm.build_system_prompt("hi"))
+
+    def test_stats_and_model_override(self):
+        provider = llm.OllamaProvider(config.load_settings()["llm"])
+        seen = {}
+
+        def fake_post(path, body, timeout):
+            seen["model"] = body["model"]
+            return {
+                "message": {"content": "Hi!"},
+                "total_duration": 4_000_000_000, "load_duration": 1_000_000_000,
+                "prompt_eval_count": 50, "prompt_eval_duration": 500_000_000,
+                "eval_count": 20, "eval_duration": 2_000_000_000,
+            }
+
+        provider._post = fake_post
+        reply, stats = provider.generate_with_stats("hello", "en", model="other:1b")
+        self.assertEqual(seen["model"], "other:1b")
+        self.assertEqual(reply, "Hi!")
+        self.assertEqual(stats["tokens_per_s"], 10.0)
+        self.assertEqual(stats["prompt_tokens"], 50)
+        self.assertEqual(stats["load_s"], 1.0)
 
     def test_hindi_prompt_asks_for_devanagari(self):
         self.provider().generate("namaste", "hi")

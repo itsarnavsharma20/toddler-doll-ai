@@ -1,0 +1,15 @@
+{
+  "note": "Original short stories for toddlers, written for this project. Played back exactly. Needs review.",
+  "stories": [
+    {
+      "id": "sleepy_bear",
+      "title": "The Sleepy Bear",
+      "text": "Once upon a time, a little bear named Boo felt very sleepy. He opened his mouth and yawned a big yawn. Yaaawn! He found a soft bed of leaves. The moon smiled and said, Good night, Boo. Boo closed his eyes. Sweet dreams, little bear. The end."
+    },
+    {
+      "id": "happy_duck",
+      "title": "The Happy Duck",
+      "text": "Dolly the duck loved the rain. Splash, splash, splash! She jumped into a puddle. Her friend the frog jumped in too. Splash, splash! They laughed and played all day. Then the sun came out and made a beautiful rainbow. The end."
+    }
+  ]
+}

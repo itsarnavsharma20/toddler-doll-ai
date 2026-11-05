@@ -2,7 +2,7 @@
   "llm": {
     "provider": "ollama",
     "model": "gemma4:e2b-it-qat",
-    "url": "http://localhost:11434",
+    "url": "http://127.0.0.1:11434",
     "timeout_seconds": 120,
     "max_tokens": 120,
     "num_ctx": 2048,
@@ -15,8 +15,10 @@
     "model": "small",
     "device": "cpu",
     "compute_type": "int8",
-    "beam_size": 1,
+    "beam_size": 5,
     "vad_filter": true,
+    "temperature": 0.0,
+    "condition_on_previous_text": false,
     "download_dir": "models/whisper",
     "min_avg_logprob": -1.0,
     "max_no_speech_prob": 0.6
@@ -24,11 +26,15 @@
   "tts": {
     "provider": "edge",
     "timeout_seconds": 30,
+    "retries": 2,
+    "rate": "+0%",
+    "pitch": "+0Hz",
     "audio_format": "mp3"
   },
   "voice": {
     "max_audio_bytes": 5000000
   },
   "toy_name": "Kiko",
+  "toy_gender": "male",
   "default_language": "en"
 }

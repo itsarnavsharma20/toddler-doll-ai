@@ -40,8 +40,9 @@ class LanguageTests(unittest.TestCase):
         self.assertIn("Devanagari", languages.prompt_name("hi"))
 
     def test_speech_helpers(self):
-        self.assertEqual(languages.tts_voice("hi"), "hi-IN-SwaraNeural")
-        self.assertEqual(languages.tts_voice("en"), "en-US-AriaNeural")
+        self.assertEqual(languages.tts_voice("hi"), "hi-IN-MadhurNeural")
+        self.assertEqual(languages.tts_voice("en"), "en-IN-PrabhatNeural")
+        self.assertIsNone(languages.tts_voice("fr"))
         self.assertEqual(languages.stt_code("hi"), "hi")
         self.assertEqual(languages.code_from_stt("hi"), "hi")
         self.assertIsNone(languages.code_from_stt("ta"))

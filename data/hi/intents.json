@@ -1,0 +1,6 @@
+{
+  "note": "Words that mean a request, in Devanagari and Roman letters. Includes spellings that speech to text produced in tests. Needs review by a Hindi speaker.",
+  "story": {"aliases": ["कहानी", "कहानियाँ", "कहानियां", "कहानियों", "कानी", "कानियो", "कथा", "स्टोरी", "kahani", "kahaani", "kahaniyan", "katha"]},
+  "abc": {"aliases": ["एबीसी", "एबीसीडी", "अल्फाबेट", "वर्णमाला", "अक्षर", "abc", "akshar", "varnamala"]},
+  "numbers": {"aliases": ["गिनती", "नंबर", "नम्बर", "अंक", "गिनो", "ginti", "gino", "number"]}
+}

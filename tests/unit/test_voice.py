@@ -57,6 +57,12 @@ class VoiceTests(unittest.TestCase):
         self.assertEqual(result["audio_format"], "mp3")
         self.assertEqual(self.llm_calls, [])
 
+    def test_timings_are_reported(self):
+        timings = self.run_voice()["timings"]
+        self.assertEqual(set(timings), {"stt_s", "chat_s", "tts_s", "total_s"})
+        self.assertTrue(all(value >= 0 for value in timings.values()))
+        self.assertGreaterEqual(timings["total_s"], timings["stt_s"] + timings["chat_s"] + timings["tts_s"] - 0.01)
+
     def test_llm_chat_by_voice(self):
         self.heard = {"text": "what is your name", "language": "en", "confident": True}
         result = self.run_voice()
@@ -91,6 +97,7 @@ class VoiceTests(unittest.TestCase):
         tts.synthesize = broken
         result = self.run_voice()
         self.assertIsNone(result["audio_base64"])
+        self.assertEqual(result["tts_error"], "offline")
         self.assertTrue(result["reply"])
 
     def test_route_rejects_large_audio(self):

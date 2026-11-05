@@ -7,7 +7,7 @@ Talks in Hindi and English first. More languages later.
 ## Features
 
 - Listens and replies in Hindi or English
-- Plays rhymes exactly as stored (not generated)
+- Plays rhymes, short stories, ABC and counting exactly as stored (not generated)
 - Chats with a small local LLM
 - Safety checks on every input and every output
 - Content and model are updated separately
@@ -66,6 +66,7 @@ scripts/         guardrail scripts shared by all AI coding tools
 
 - [docs/product-brief.md](docs/product-brief.md)
 - [docs/architecture.md](docs/architecture.md)
+- [docs/project-journey.md](docs/project-journey.md): the story of the project version by version, for anyone to read
 - [docs/adr/0001-llm-choice.md](docs/adr/0001-llm-choice.md)
 - [AGENTS.md](AGENTS.md): rules shared by all AI coding tools. [CLAUDE.md](CLAUDE.md) and [GEMINI.md](GEMINI.md) point to it.
 

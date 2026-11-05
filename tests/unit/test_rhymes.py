@@ -58,6 +58,10 @@ class RhymeMatchTests(unittest.TestCase):
         self.assertEqual(rhymes.find_rhyme("tell me a rhyme", "en")["language"], "en")
         self.assertEqual(rhymes.find_rhyme("एक गाना सुनाओ", "hi")["language"], "hi")
 
+    def test_generic_step_can_be_skipped(self):
+        self.assertIsNone(rhymes.find_rhyme("tell me a rhyme", "en", generic=False))
+        self.assertIsNotNone(rhymes.find_rhyme("sing twinkle twinkle", "en", generic=False))
+
     def test_ordinary_chat_does_not_match(self):
         for sentence in ("what is your name", "i like my teddy", "how are you today", "hello", "star"):
             self.assertIsNone(rhymes.find_rhyme(sentence), sentence)

@@ -1,0 +1,7 @@
+{
+  "note": "Helps speech to text with the toy's name and common requests, and lets the pipeline drop a leading greeting plus the toy's name. Includes spellings Whisper produced in tests.",
+  "hotwords": ["किको", "कहानी", "कविता", "गाना", "सुनाओ"],
+  "initial_prompt": "किको, मुझे कहानी सुननी है। कविता सुनाओ। गाना गाओ।",
+  "name_variants": ["किको", "किकू", "कीको", "की को", "किक्को", "kiko", "kiku"],
+  "greetings": ["हे", "हाय", "हैलो", "हेलो", "अरे", "ओ", "सुनो", "नमस्ते", "namaste", "suno", "arre"]
+}

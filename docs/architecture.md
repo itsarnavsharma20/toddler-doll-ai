@@ -3,11 +3,19 @@
 ## Chat flow
 
 ```
-text -> language detect -> input safety -> rhyme lookup -> LLM -> output safety -> reply
-                                |               |
-                                v               v
-                         gentle redirect   exact rhyme text (full or continued)
+text -> drop "Hey Kiko" -> language detect -> input safety
+     -> named rhyme or a line of one      -> exact rhyme text (full or continued)
+     -> story / abc / numbers request     -> exact stored content
+     -> general rhyme request             -> exact rhyme text
+     -> LLM -> output safety -> reply
 ```
+
+Stored content (rhymes, stories, abc, numbers) never goes through the LLM. Requests are matched with
+fuzzy word matching so small speech to text mistakes still work (`content/intents.py`, aliases in
+`data/<lang>/intents.json`). When speech to text produces a new misspelling of a request word, add
+it to the aliases.
+
+Before language detection, a leading greeting plus the toy's name ("Hey Kiko, ...") is dropped (`pipeline/wake.py`).
 
 Voice flow (`POST /v1/voice`):
 
@@ -37,8 +45,12 @@ Dependencies point one way: API, pipeline, services / safety / content, core.
 | `config/settings.json` | LLM model, timeouts, default language. |
 | `config/languages.json` | ISO keyed registry: name, prompt name, enabled, STT language, TTS voice. |
 | `data/<lang>/rhymes.json` | Rhymes. Triggers in Roman and Devanagari. |
+| `data/<lang>/stories.json` | Short stories. One is picked at random. |
+| `data/<lang>/basics.json` | Learning basics: `abc` and `numbers`. |
+| `data/<lang>/intents.json` | Request words (aliases) for story, abc, numbers. |
 | `data/<lang>/safety.json` | Blocked words for that language. All lists are merged at runtime. |
 | `data/<lang>/messages.json` | Fixed toy phrases: redirect, fallback, not heard, model down. |
+| `data/<lang>/stt_hints.json` | Speech hints: hotwords, initial prompt, spellings of the toy's name, greetings. |
 
 Add a language: create `data/<code>/`, add its files, set `enabled` to true in `config/languages.json`.
 
@@ -55,7 +67,7 @@ Content and model are separate so each can be updated on its own (future OTA).
 | `POST /v1/warmup` | Load the model into memory. |
 | `GET /v1/stats` | Anonymous counts by reply source. No child text. |
 
-`source` values: `empty`, `safety_input`, `rhyme:<id>`, `rhyme:<id>:continue`, `llm`, `fallback`, `low_confidence` (voice only).
+`source` values: `empty`, `safety_input`, `rhyme:<id>`, `rhyme:<id>:continue`, `story:<id>`, `basics:abc`, `basics:numbers`, `llm`, `fallback`, `low_confidence` (voice only).
 
 ## Rules that shape the design
 

@@ -1,0 +1,7 @@
+{
+  "note": "Helps speech to text with the toy's name and common requests, and lets the pipeline drop a leading greeting plus the toy's name.",
+  "hotwords": ["Kiko"],
+  "initial_prompt": "Kiko, can you sing a rhyme? Tell me a story, please. Let us learn ABC and numbers.",
+  "name_variants": ["kiko", "kiku", "keeko", "kico", "kyko"],
+  "greetings": ["hey", "hi", "hello", "ok", "okay", "oh", "yo"]
+}

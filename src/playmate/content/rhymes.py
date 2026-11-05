@@ -56,8 +56,10 @@ def _match(rhyme, text, mode):
     return {"id": rhyme["id"], "title": rhyme["title"], "language": rhyme["language"], "text": text, "mode": mode}
 
 
-def find_rhyme(text, language="en"):
-    """Return {"id", "title", "language", "text", "mode"} or None. mode is "full" or "continue"."""
+def find_rhyme(text, language="en", generic=True):
+    """Return {"id", "title", "language", "text", "mode"} or None. mode is "full" or "continue".
+
+    generic=False skips the general request step ("sing a song"), so other requests can be checked first."""
     words = normalize(text).split()
     if not words:
         return None
@@ -86,7 +88,7 @@ def find_rhyme(text, language="en"):
                 return _match(rhyme, "\n".join(rest), "continue")
             return _match(rhyme, rhyme["text"], "full")
 
-    if GENERIC_WORDS & set(words):
+    if generic and GENERIC_WORDS & set(words):
         same_language = [r for r in rhymes if r["language"] == language]
         pick = random.choice(same_language or list(rhymes))
         return _match(pick, pick["text"], "full")

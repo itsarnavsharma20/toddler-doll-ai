@@ -1,0 +1,6 @@
+{
+  "note": "Words that mean a request. Matching ignores small spelling slips. Add spellings that speech to text produced in tests.",
+  "story": {"aliases": ["story", "stories", "tale", "tales", "storybook"]},
+  "abc": {"aliases": ["abc", "abcd", "abcs", "alphabet", "alphabets", "letters"]},
+  "numbers": {"aliases": ["numbers", "number", "counting", "count", "one two three", "123"]}
+}

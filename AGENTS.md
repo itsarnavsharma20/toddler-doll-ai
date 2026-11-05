@@ -25,6 +25,7 @@ When a hook blocks an action, do not look for a way around it. Tell the owner wh
 - LLM: `gemma4:e2b-it-qat` (Gemma 4 E2B, free, Apache 2.0) via local Ollama on CPU. Upgrade path: E4B. See `docs/adr/0001-llm-choice.md`.
 - Package name: `playmate` (under `src/`).
 - Toy character name: Kiko (`toy_name` in `config/settings.json`). The brand name is not decided. Do not rename the package or repo yet.
+- Kiko is male (`toy_gender`). The LLM prompt uses masculine Hindi forms and the voice follows the gender from `tts_voices` in `config/languages.json` (now `hi-IN-MadhurNeural` and `en-IN-PrabhatNeural`). Speaking `rate` and `pitch` are in `config/settings.json` (`tts`).
 - Local LLM only. No cloud LLM or cloud speech service receives child data. See `docs/adr/0003-local-llm-only.md`.
 - Rhyme search is fuzzy text matching, not embeddings. See `docs/adr/0002-rhyme-search.md`.
 - Bad word reply is a gentle redirect, never a correction.
@@ -46,13 +47,18 @@ src/playmate/
   pipeline/chat.py       chat flow: input safety, rhyme lookup, LLM, output safety
   services/llm.py        LLM provider interface, local Ollama provider
   pipeline/voice.py      voice flow: speech to text, chat flow, text to speech
+  pipeline/wake.py       drops a leading greeting plus the toy's name ("Hey Kiko, ...")
+  content/hints.py       speech hints per language (hotwords, initial prompt, name spellings)
   services/stt.py        speech to text (faster-whisper, local, audio never stored)
   services/tts.py        text to speech (edge-tts for prototype only, provider interface)
   safety/filters.py      input and output safety filters
   content/rhymes.py      fuzzy rhyme lookup, continue from a line
+  content/intents.py     detects story, abc, numbers requests (forgives small spelling slips)
+  content/library.py     stories and basics (abc, numbers) from data/<lang>/
   content/messages.py    fixed toy phrases per language
 config/                  settings.json (model, default language), languages.json (ISO keyed registry)
-data/<lang>/             one folder per ISO code (en, hi): rhymes.json, safety.json, messages.json
+data/<lang>/             one folder per ISO code (en, hi): rhymes.json, stories.json, basics.json, intents.json,
+                         safety.json, messages.json, stt_hints.json
                          add a language = new folder + enabled in config/languages.json
 docs/                    product-brief.md, architecture.md, adr/
 tests/unit/              unit tests

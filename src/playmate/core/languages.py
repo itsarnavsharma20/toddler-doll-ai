@@ -43,7 +43,12 @@ def prompt_name(code):
 
 
 def tts_voice(code):
-    return _registry().get(code, {}).get("tts_voice")
+    """Voice for the language that matches the toy's gender (toy_gender in settings).
+
+    Falls back to the other gender if only one voice is listed, so a language is never silent."""
+    voices = _registry().get(code, {}).get("tts_voices") or {}
+    gender = config.load_settings().get("toy_gender", "male")
+    return voices.get(gender) or next(iter(voices.values()), None)
 
 
 def stt_code(code):
@@ -62,7 +67,7 @@ def code_from_stt(stt_language):
 def describe():
     return [
         {"code": code, "name": entry.get("name"), "enabled": bool(entry.get("enabled")),
-         "stt": entry.get("stt"), "tts_voice": entry.get("tts_voice")}
+         "stt": entry.get("stt"), "tts_voice": tts_voice(code)}
         for code, entry in _registry().items()
     ]
 
