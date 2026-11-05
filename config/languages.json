@@ -1,8 +1,38 @@
 {
-  "english": true,
-  "hindi": true,
-  "tamil": false,
-  "telugu": false,
-  "french": false,
-  "spanish": false
+  "en": {
+    "name": "english",
+    "prompt_name": "English",
+    "enabled": true,
+    "stt": "en",
+    "tts_voice": "en-US-AriaNeural"
+  },
+  "hi": {
+    "name": "hindi",
+    "prompt_name": "Hindi, written in Devanagari script",
+    "enabled": true,
+    "stt": "hi",
+    "tts_voice": "hi-IN-SwaraNeural"
+  },
+  "ta": {
+    "name": "tamil",
+    "prompt_name": "Tamil",
+    "enabled": false,
+    "stt": "ta",
+    "tts_voice": "ta-IN-PallaviNeural"
+  },
+  "te": {
+    "name": "telugu",
+    "prompt_name": "Telugu",
+    "enabled": false
+  },
+  "fr": {
+    "name": "french",
+    "prompt_name": "French",
+    "enabled": false
+  },
+  "es": {
+    "name": "spanish",
+    "prompt_name": "Spanish",
+    "enabled": false
+  }
 }

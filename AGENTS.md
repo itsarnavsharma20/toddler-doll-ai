@@ -24,8 +24,12 @@ When a hook blocks an action, do not look for a way around it. Tell the owner wh
 
 - LLM: `gemma4:e2b-it-qat` (Gemma 4 E2B, free, Apache 2.0) via local Ollama on CPU. Upgrade path: E4B. See `docs/adr/0001-llm-choice.md`.
 - Package name: `playmate` (under `src/`).
-- STT: `faster-whisper` small, int8, CPU.
-- TTS: free option first (`edge-tts` or Piper). Paid options only later.
+- Toy character name: Kiko (`toy_name` in `config/settings.json`). The brand name is not decided. Do not rename the package or repo yet.
+- Local LLM only. No cloud LLM or cloud speech service receives child data. See `docs/adr/0003-local-llm-only.md`.
+- Rhyme search is fuzzy text matching, not embeddings. See `docs/adr/0002-rhyme-search.md`.
+- Bad word reply is a gentle redirect, never a correction.
+- STT: `faster-whisper` small, int8, CPU. Model files live in `models/whisper` (git ignored).
+- TTS: `edge-tts` for prototype only (unofficial service, not for production). Production candidate: Piper. See `docs/adr/0004-voice-stack.md`.
 - Backend: Python 3.10 + FastAPI.
 - Budget: free models and free tools only. Do not add paid services.
 - Build order: text chat first, voice layer after.
@@ -34,17 +38,22 @@ When a hook blocks an action, do not look for a way around it. Tell the owner wh
 
 ```
 src/playmate/
-  api/main.py            FastAPI app (thin, calls the pipeline)
+  api/main.py            FastAPI app (thin, calls the pipeline): /v1/chat, /v1/health, /v1/languages, /v1/warmup, /v1/stats
   core/config.py         paths and config loading
+  core/languages.py      language registry and text language detection
+  core/text.py           text helpers (normalize, strip emoji), Devanagari safe
+  core/metrics.py        anonymous counters (reply source only)
   pipeline/chat.py       chat flow: input safety, rhyme lookup, LLM, output safety
-  services/llm.py        LLM calls (local Ollama), model name from config
-  services/stt.py        speech to text (not built yet)
-  services/tts.py        text to speech (not built yet)
+  services/llm.py        LLM provider interface, local Ollama provider
+  pipeline/voice.py      voice flow: speech to text, chat flow, text to speech
+  services/stt.py        speech to text (faster-whisper, local, audio never stored)
+  services/tts.py        text to speech (edge-tts for prototype only, provider interface)
   safety/filters.py      input and output safety filters
-  content/rhymes.py      rhyme lookup
-config/                  settings.json (model, default language), languages.json (toggles)
-data/content/            rhymes.json (more content later)
-data/safety/             blocked_words.json
+  content/rhymes.py      fuzzy rhyme lookup, continue from a line
+  content/messages.py    fixed toy phrases per language
+config/                  settings.json (model, default language), languages.json (ISO keyed registry)
+data/<lang>/             one folder per ISO code (en, hi): rhymes.json, safety.json, messages.json
+                         add a language = new folder + enabled in config/languages.json
 docs/                    product-brief.md, architecture.md, adr/
 tests/unit/              unit tests
 tests/guardrails/        guardrail tests
@@ -55,6 +64,8 @@ scripts/guardrails/      shared guardrail scripts (used by every tool's hooks)
 
 ### Language
 - Every file in the repo must be in English. Code, comments, docs, commit messages.
+- One exception: content files under `data/<lang>/` hold the language they are for (for example Devanagari Hindi rhymes, safety words and toy phrases). Code never contains non-English text.
+- Language codes are ISO (`en`, `hi`). Never use language names as keys in code or data.
 - Chat replies to the owner are in Hinglish (see Communication).
 
 ### Safety (child product, highest priority)
@@ -111,3 +122,4 @@ Ask the owner before running any of these.
 | Run app | `uvicorn playmate.api.main:app --app-dir src --reload` |
 | Unit tests | `python -m unittest discover -s tests/unit -v` |
 | Guardrail tests | `python tests/guardrails/test_guard.py` |
+| Benchmark (speed, RAM) | `python scripts/benchmark.py [--audio clip.wav]` |

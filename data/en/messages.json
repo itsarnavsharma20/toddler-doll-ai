@@ -1,0 +1,6 @@
+{
+  "redirect": "Let's use a happy word instead! Do you want to hear a rhyme?",
+  "output_fallback": "Let's sing a song together! Do you want to hear Twinkle Twinkle?",
+  "not_heard": "I did not hear you. Can you say it again?",
+  "llm_down": "Hmm, let me think. Can you say it again?"
+}

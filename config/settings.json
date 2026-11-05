@@ -6,7 +6,29 @@
     "timeout_seconds": 120,
     "max_tokens": 120,
     "num_ctx": 2048,
-    "think": false
+    "think": false,
+    "keep_alive": "30m",
+    "warmup_on_start": false
   },
-  "default_language": "english"
+  "stt": {
+    "provider": "faster-whisper",
+    "model": "small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "beam_size": 1,
+    "vad_filter": true,
+    "download_dir": "models/whisper",
+    "min_avg_logprob": -1.0,
+    "max_no_speech_prob": 0.6
+  },
+  "tts": {
+    "provider": "edge",
+    "timeout_seconds": 30,
+    "audio_format": "mp3"
+  },
+  "voice": {
+    "max_audio_bytes": 5000000
+  },
+  "toy_name": "Kiko",
+  "default_language": "en"
 }

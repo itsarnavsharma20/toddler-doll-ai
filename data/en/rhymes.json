@@ -1,0 +1,41 @@
+{
+  "note": "Rhymes are played back exactly as written. Triggers include Devanagari spellings because Hindi speech to text writes English words in Devanagari.",
+  "rhymes": [
+    {
+      "id": "twinkle_twinkle",
+      "title": "Twinkle Twinkle Little Star",
+      "triggers": ["twinkle", "twinkle twinkle", "little star", "ट्विंकल", "ट्विंकल ट्विंकल", "लिटिल स्टार"],
+      "text": "Twinkle, twinkle, little star,\nHow I wonder what you are!\nUp above the world so high,\nLike a diamond in the sky.\nTwinkle, twinkle, little star,\nHow I wonder what you are!"
+    },
+    {
+      "id": "baa_baa_black_sheep",
+      "title": "Baa Baa Black Sheep",
+      "triggers": ["baa baa black sheep", "black sheep", "baa baa", "बा बा ब्लैक शीप", "ब्लैक शीप"],
+      "text": "Baa, baa, black sheep, have you any wool?\nYes sir, yes sir, three bags full.\nOne for the master, and one for the dame,\nAnd one for the little boy who lives down the lane."
+    },
+    {
+      "id": "humpty_dumpty",
+      "title": "Humpty Dumpty",
+      "triggers": ["humpty dumpty", "humpty", "हम्प्टी डम्प्टी", "हम्टी डम्टी"],
+      "text": "Humpty Dumpty sat on a wall,\nHumpty Dumpty had a great fall.\nAll the king's horses and all the king's men\nCouldn't put Humpty together again."
+    },
+    {
+      "id": "jack_and_jill",
+      "title": "Jack and Jill",
+      "triggers": ["jack and jill", "jack jill", "जैक एंड जिल", "जैक जिल"],
+      "text": "Jack and Jill went up the hill\nTo fetch a pail of water.\nJack fell down and broke his crown,\nAnd Jill came tumbling after."
+    },
+    {
+      "id": "itsy_bitsy_spider",
+      "title": "Itsy Bitsy Spider",
+      "triggers": ["itsy bitsy spider", "incy wincy spider", "itsy bitsy", "इट्सी बिट्सी स्पाइडर", "इट्सी बिट्सी"],
+      "text": "The itsy bitsy spider climbed up the water spout.\nDown came the rain and washed the spider out.\nOut came the sun and dried up all the rain,\nAnd the itsy bitsy spider climbed up the spout again."
+    },
+    {
+      "id": "johny_johny",
+      "title": "Johny Johny Yes Papa",
+      "triggers": ["johny johny", "johnny johnny", "जॉनी जॉनी"],
+      "text": "Johny Johny,\nYes Papa?\nEating sugar?\nNo, Papa!\nTelling lies?\nNo, Papa!\nOpen your mouth,\nHa, ha, ha!"
+    }
+  ]
+}

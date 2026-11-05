@@ -1,6 +1,7 @@
 # Playmate
 
 A safe, friendly AI companion for toddlers (1 to 5 years), built on free open models.
+The toy's character name is **Kiko** (set in `config/settings.json`).
 Talks in Hindi and English first. More languages later.
 
 ## Features
@@ -18,7 +19,7 @@ Talks in Hindi and English first. More languages later.
 3. LLM (if no rhyme matched)
 4. Output safety check
 
-Speech to text and text to speech come next.
+Voice (`POST /v1/voice`) adds speech to text before this flow and text to speech after it.
 
 ## Stack
 
@@ -26,8 +27,8 @@ Speech to text and text to speech come next.
 | --- | --- |
 | Backend | Python, FastAPI |
 | LLM | Gemma 4 E2B (`gemma4:e2b-it-qat`) via Ollama, local, CPU |
-| STT (planned) | faster-whisper |
-| TTS (planned) | edge-tts or Piper |
+| STT | faster-whisper (local, CPU) |
+| TTS | edge-tts (prototype only), Piper planned for production |
 
 ## Quick start
 
@@ -55,7 +56,7 @@ python tests/guardrails/test_guard.py
 ```
 src/playmate/    application code (api, core, pipeline, services, safety, content)
 config/          settings and language toggles
-data/            rhymes and safety word lists
+data/<lang>/    rhymes, safety words and toy phrases, one folder per language (en, hi)
 docs/            product brief, architecture, decision records
 tests/           unit and guardrail tests
 scripts/         guardrail scripts shared by all AI coding tools
@@ -70,4 +71,4 @@ scripts/         guardrail scripts shared by all AI coding tools
 
 ## Status
 
-Text chat works end to end. Voice layer and more content are next.
+Text chat works end to end. The voice route is built and unit tested with fakes. It has not been run with a real microphone clip yet. More content is next.

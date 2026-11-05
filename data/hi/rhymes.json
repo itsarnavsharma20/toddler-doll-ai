@@ -1,0 +1,29 @@
+{
+  "note": "Traditional Hindi rhymes, played back exactly as written. Machli Jal Ki Rani Hai is softened for toddlers. More rhymes must come from a reviewed source.",
+  "rhymes": [
+    {
+      "id": "machli_jal_ki_rani",
+      "title": "मछली जल की रानी है",
+      "triggers": ["machli jal ki rani", "machhli jal ki rani", "jal ki rani", "machli", "मछली जल की रानी", "मछली जल की रानी है", "मछली"],
+      "text": "मछली जल की रानी है,\nजीवन उसका पानी है।\nहाथ लगाओगे डर जाएगी,\nबाहर निकालोगे घबराएगी।"
+    },
+    {
+      "id": "chanda_mama_door_ke",
+      "title": "चंदा मामा दूर के",
+      "triggers": ["chanda mama door ke", "chanda mama", "chand mama", "चंदा मामा दूर के", "चंदा मामा", "चांद मामा"],
+      "text": "चंदा मामा दूर के,\nपुए पकाएँ बूर के।\nआप खाएँ थाली में,\nमुन्ने को दें प्याली में।\nप्याली गई टूट,\nमुन्ना गया रूठ।"
+    },
+    {
+      "id": "lakdi_ki_kathi",
+      "title": "लकड़ी की काठी",
+      "triggers": ["lakdi ki kathi", "lakdi ki kaathi", "kathi pe ghoda", "लकड़ी की काठी", "काठी पे घोड़ा"],
+      "text": "लकड़ी की काठी, काठी पे घोड़ा,\nघोड़े की दुम पे जो मारा हथौड़ा,\nदौड़ा दौड़ा दौड़ा घोड़ा दुम उठा के दौड़ा।"
+    },
+    {
+      "id": "nani_teri_morni",
+      "title": "नानी तेरी मोरनी",
+      "triggers": ["nani teri morni", "teri morni", "नानी तेरी मोरनी", "तेरी मोरनी"],
+      "text": "नानी तेरी मोरनी को मोर ले गए,\nबाकी जो बचा था काले चोर ले गए।"
+    }
+  ]
+}
