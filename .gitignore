@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.log
+logs/
+.guardrails_unlock
+.claude/settings.local.json
+
+# Models and audio (large or private)
+models/
+*.gguf
+*.safetensors
+*.wav
+*.mp3
+
+.vscode/
+.idea/

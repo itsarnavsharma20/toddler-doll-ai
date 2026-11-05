@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "name": "guardrails",
+            "type": "command",
+            "command": "python scripts/guardrails/guard.py --format gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}

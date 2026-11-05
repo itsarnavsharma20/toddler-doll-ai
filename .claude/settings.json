@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "defaultMode": "default",
+    "disableBypassPermissionsMode": "disable",
+    "ask": [
+      "Write",
+      "Edit",
+      "NotebookEdit",
+      "Bash",
+      "PowerShell"
+    ],
+    "deny": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "PowerShell(git *)",
+      "PowerShell(gh *)",
+      "Bash(rm *)",
+      "Bash(rmdir *)",
+      "PowerShell(Remove-Item *)",
+      "PowerShell(del *)",
+      "PowerShell(rmdir *)",
+      "Read(./.env)",
+      "Read(./.env.local)",
+      "Read(./.env.production)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/scripts/guardrails/guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

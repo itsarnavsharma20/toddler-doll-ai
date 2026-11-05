@@ -1,0 +1,15 @@
+{
+  "guardrails": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "command": "python scripts/guardrails/guard.py --format antigravity"
+          }
+        ]
+      }
+    ]
+  }
+}

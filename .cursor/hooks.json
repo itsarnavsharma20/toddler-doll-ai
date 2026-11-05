@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "python scripts/guardrails/guard.py --format cursor",
+        "timeout": 10,
+        "failClosed": true
+      }
+    ],
+    "beforeReadFile": [
+      {
+        "command": "python scripts/guardrails/guard.py --format cursor",
+        "timeout": 10,
+        "failClosed": true
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "python scripts/guardrails/guard.py --format cursor",
+        "matcher": "Shell|Read|Write|Delete|Grep|Task",
+        "timeout": 10,
+        "failClosed": true
+      }
+    ]
+  }
+}

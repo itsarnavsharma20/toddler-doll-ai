@@ -1,0 +1,12 @@
+{
+  "llm": {
+    "provider": "ollama",
+    "model": "gemma4:e2b-it-qat",
+    "url": "http://localhost:11434",
+    "timeout_seconds": 120,
+    "max_tokens": 120,
+    "num_ctx": 2048,
+    "think": false
+  },
+  "default_language": "english"
+}
